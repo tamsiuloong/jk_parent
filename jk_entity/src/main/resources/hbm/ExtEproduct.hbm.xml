@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.yaorange.jk.entity.ExtEproduct" table="EXT_EPRODUCT_C" schema="JK">
+        <id name="id" column="EXT_EPRODUCT_ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="productNo" column="PRODUCT_NO"/>
+        <property name="productImage" column="PRODUCT_IMAGE"/>
+        <property name="productDesc" column="PRODUCT_DESC"/>
+        <property name="cnumber" column="CNUMBER"/>
+        <property name="packingUnit" column="PACKING_UNIT"/>
+        <property name="price" column="PRICE"/>
+        <property name="amount" column="AMOUNT"/>
+        <property name="productRequest" column="PRODUCT_REQUEST"/>
+        <property name="orderNo" column="ORDER_NO"/>
+
+        <many-to-one name="factory" class="com.yaorange.jk.entity.Factory" column="FACTORY_ID"/>
+    </class>
+</hibernate-mapping>

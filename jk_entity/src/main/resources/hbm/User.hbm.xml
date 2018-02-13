@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+    dynamic-insert:在insert时，如何该字段为空，采用数据库默认值
+    dynamic-update:在update时，如何该字段为空，采用数据库默认值
+    -->
+    <class name="com.yaorange.jk.entity.User" table="USER_P" dynamic-insert="true" dynamic-update="true">
+
+        <id name="id" column="USER_ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="userName" column="USER_NAME" />
+        <property name="password" column="PASSWORD" />
+        <property name="state" column="STATE" />
+        <property name="createBy" column="CREATE_BY" />
+        <property name="createDept" column="CREATE_DEPT" />
+        <property name="createTime" column="CREATE_TIME" />
+        <property name="updateBy" column="UPDATE_BY" />
+        <property name="updateTime" column="UPDATE_TIME" />
+
+        <many-to-one name="dept" class="com.yaorange.jk.entity.Dept" column="DEPT_ID"/>
+        <one-to-one name="userInfo" class="com.yaorange.jk.entity.UserInfo" cascade="all"/>
+
+        <set name="roleSet" inverse="false" lazy="true" table="ROLE_USER_P">
+            <key column="USER_ID"></key>
+            <many-to-many class="com.yaorange.jk.entity.Role" column="ROLE_ID"/>
+        </set>
+    </class>
+
+</hibernate-mapping>

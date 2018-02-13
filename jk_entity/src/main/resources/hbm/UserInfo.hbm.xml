@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.yaorange.jk.entity">
+    <class name="UserInfo" table="USER_INFO_P" dynamic-insert="true" dynamic-update="true">
+
+        <id name="id" column="USER_INFO_ID">
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+
+        <property name="name" column="NAME" />
+        <property name="joinDate" column="JOIN_DATE" />
+        <property name="salary" column="SALARY" />
+        <property name="birthday" column="BIRTHDAY" />
+        <property name="gender" column="GENDER" />
+        <property name="station" column="STATION" />
+        <property name="telephone" column="TELEPHONE" />
+        <property name="degree" column="DEGREE" />
+        <property name="remark" column="REMARK" />
+        <property name="orderNo" column="ORDER_NO" />
+        <property name="email" column="EMAIL" />
+
+        <property name="createBy" column="CREATE_BY" />
+        <property name="createDept" column="CREATE_DEPT" />
+        <property name="createTime" column="CREATE_TIME" />
+        <property name="updateBy" column="UPDATE_BY" />
+        <property name="updateTime" column="UPDATE_TIME" />
+
+
+        <many-to-one name="manager" class="User" column="MANAGER_ID"/>
+        <one-to-one name="user" class="User" constrained="true" />
+
+    </class>
+
+</hibernate-mapping>

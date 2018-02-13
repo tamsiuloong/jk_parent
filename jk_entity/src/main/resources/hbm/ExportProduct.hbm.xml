@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.yaorange.jk.entity.ExportProduct" table="EXPORT_PRODUCT_C" schema="JK">
+        <id name="id" column="EXPORT_PRODUCT_ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="productNo" column="PRODUCT_NO"/>
+        <property name="packingUnit" column="PACKING_UNIT"/>
+        <property name="cnumber" column="CNUMBER"/>
+        <property name="boxNum" column="BOX_NUM"/>
+        <property name="grossWeight" column="GROSS_WEIGHT"/>
+        <property name="netWeight" column="NET_WEIGHT"/>
+        <property name="sizeLength" column="SIZE_LENGTH"/>
+        <property name="sizeWidth" column="SIZE_WIDTH"/>
+        <property name="sizeHeight" column="SIZE_HEIGHT"/>
+        <property name="exPrice" column="EX_PRICE"/>
+        <property name="price" column="PRICE"/>
+        <property name="tax" column="TAX"/>
+        <property name="orderNo" column="ORDER_NO"/>
+
+        <many-to-one name="factory" class="com.yaorange.jk.entity.Factory" column="FACTORY_ID"/>
+        <many-to-one name="export" class="com.yaorange.jk.entity.Export" column="EXPORT_ID"/>
+        <set name="extEproducts" cascade="all-delete-orphan" order-by="ORDER_NO">
+            <key column="EXPORT_PRODUCT_ID"></key>
+            <one-to-many class="com.yaorange.jk.entity.ExtEproduct"/>
+        </set>
+    </class>
+</hibernate-mapping>
