@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       					   http://www.springframework.org/schema/beans/spring-beans.xsd
+       					   http://www.springframework.org/schema/context
+       					   http://www.springframework.org/schema/context/spring-context.xsd
+       					   http://www.springframework.org/schema/tx
+       					   http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 开启spring注解扫描-->
+    <context:component-scan base-package="com.yaorange.jk"/>
+
+
+    <!--加载db.properties配置文件 -->
+    <context:property-placeholder location="classpath:*.properties"/>
+
+    <!-- 配置druid连接池 强烈推荐-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driverClass}"></property>
+        <property name="url" value="${jdbc.jdbcUrl}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="maxWait" value="${maxWait}"></property>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--<property name="configLocation" value="classpath:hibernate23232.cfg.xml"/>-->
+
+        <!-- 配置 Hibernate 的相关属性 -->
+        <property name="hibernateProperties">
+            <props>
+                <!-- 配置 Hibernate 的方言 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <!-- 显示 SQL -->
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 格式化 SQL -->
+                <prop key="hibernate.format_sql">true</prop>
+                <!-- 映射到 DDL 的自动创建
+                <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+            </props>
+        </property>
+        <!-- 配置引入映射文件 -->
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:hbm/*.hbm.xml</value>
+            </list>
+        </property>
+
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+
+    <import resource="classpath:applicationContext-shiro.xml"/>
+    <import resource="classpath:applicationContext-mail.xml"/>
+    <import resource="classpath:applicationContext-quartz.xml"/>
+    <!--<import resource="classpath:applicationContext-cxf.xml"/>-->
+</beans>

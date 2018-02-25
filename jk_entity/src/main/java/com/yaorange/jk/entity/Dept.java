@@ -1,5 +1,7 @@
 package com.yaorange.jk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
 public class Dept implements Serializable{
     private String id;
     private String deptName;
+    @JsonIgnore
     private Dept parent;//many2one
     private Long state;
 

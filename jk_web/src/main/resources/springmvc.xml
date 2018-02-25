@@ -37,7 +37,7 @@
 
 
     <mvc:cors>
-        <mvc:mapping path="/**" />
+        <mvc:mapping path="/**" allowed-origins="http://localhost:9001" allowed-methods="GET,PUT,DELETE,POST"/>
     </mvc:cors>
 
     <!--<mvc:cors>-->
