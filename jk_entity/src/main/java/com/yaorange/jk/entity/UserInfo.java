@@ -1,5 +1,6 @@
 package com.yaorange.jk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import oracle.sql.DATE;
 
 import java.util.Date;
@@ -37,6 +38,7 @@ public class UserInfo extends BaseEntity {
     private Integer orderNo;
     private String email;
 
+    @JsonIgnore
     private User user;//所属用户
 
     public String getId() {

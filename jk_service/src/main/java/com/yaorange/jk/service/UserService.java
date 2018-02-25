@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2017/12/20
  */
 public interface UserService {
-    Pagination findByPage(Pagination page, User degree);
+    Pagination findByPage(Pagination page);
 
     List<User> findAll();
 

@@ -10,12 +10,8 @@ import com.yaorange.jk.utils.JavaMailUtils;
 import com.yaorange.jk.utils.Pagination;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailMessage;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -43,16 +39,16 @@ public class UserServiceImpl implements UserService {
     private JavaMailUtils javaMailUtils;
     @Override
     @Transactional(readOnly = true)
-    public Pagination findByPage(Pagination page, User user) {
+    public Pagination findByPage(Pagination page) {
         String hql = "from User where 1=1";
-        if(user.getUserInfo().getDegree()==2)
-        {
-            hql +=" and createDept = '"+user.getDept().getDeptName()+"'";
-        }
-        else if(user.getUserInfo().getDegree()==3)
-        {
-            hql += " and createBy = '"+user.getUserName()+"'";
-        }
+//        if(user.getUserInfo().getDegree()==2)
+//        {
+//            hql +=" and createDept = '"+user.getDept().getDeptName()+"'";
+//        }
+//        else if(user.getUserInfo().getDegree()==3)
+//        {
+//            hql += " and createBy = '"+user.getUserName()+"'";
+//        }
 
         return userDao.pageByHql(hql,page.getPageNo(),page.getPageSize());
     }

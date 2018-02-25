@@ -70,15 +70,15 @@ public class Pagination extends SimplePage implements java.io.Serializable {
     public List<?> getList() {
         return list;
     }
-
-    /**
-     * 获得分页内容
-     *
-     * @return
-     */
-    public List<?> getResults() {
-        return list;
-    }
+//
+//    /**
+//     * 获得分页内容
+//     *
+//     * @return
+//     */
+//    public List<?> getResults() {
+//        return list;
+//    }
 
 
     /**
@@ -91,60 +91,60 @@ public class Pagination extends SimplePage implements java.io.Serializable {
     }
 
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+//    public void setUrl(String url) {
+//        this.url = url;
+//    }
 
-    public String getLinks() {
-        StringBuffer sBuf = new StringBuffer();
-        int curPageNo = this.pageNo;		//当前页
-
-
-        sBuf.append("<span class=\"noprint\" style=\"padding:5px;\">");
-
-        //利用js动态设置分页页码
-        sBuf.append("<script language=\"javascript\">");
-        sBuf.append("	function setPageNo( value ){");
-        sBuf.append("		document.getElementById(\"page.pageNo\").value = value;");
-        //sBuf.append("		alert(document.getElementById(\"pageNo\").value);");
-        sBuf.append("	}");
-        sBuf.append("</script>");
-        sBuf.append("<input type=\"hidden\" id=\"page.pageNo\" name=\"page.pageNo\" value=\"").append(curPageNo).append("\">");		//分页参数：当前页隐藏域
-
-
-        sBuf.append("&nbsp;第").append(curPageNo).append("页 / 共").append(getTotalPage()).append("页&nbsp;");
-        sBuf.append("&nbsp;总共").append(getTotalCount()).append("条记录 每页").append(getPageSize()).append("条记录&nbsp;");
-
-        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(1);formSubmit('").append(url).append("','_self')");
-        sBuf.append("\">[首页]");
-        sBuf.append("</a>&nbsp;");
-
-        if(this.pageNo<=1){
-            curPageNo = 1;
-        }else{
-            curPageNo = this.pageNo - 1;
-        }
-        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(").append(curPageNo).append(");formSubmit('").append(url).append("','_self')");
-        sBuf.append("\">[上一页]");
-        sBuf.append("</a>&nbsp;");
-
-
-        if(this.pageNo>=getTotalPage()){
-            curPageNo = getTotalPage();
-        }else{
-            curPageNo = this.pageNo + 1;
-        }
-        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(").append(curPageNo).append(");formSubmit('").append(url).append("','_self')");
-        sBuf.append("\">[下一页]");
-        sBuf.append("</a>&nbsp;");
-
-        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(").append(getTotalPage()).append(");formSubmit('").append(url).append("','_self')");
-        sBuf.append("\">[末页]");
-        sBuf.append("</a>&nbsp;");
-
-        sBuf.append("</span>");
-
-        return sBuf.toString();
-    }
+//    public String getLinks() {
+//        StringBuffer sBuf = new StringBuffer();
+//        int curPageNo = this.pageNo;		//当前页
+//
+//
+//        sBuf.append("<span class=\"noprint\" style=\"padding:5px;\">");
+//
+//        //利用js动态设置分页页码
+//        sBuf.append("<script language=\"javascript\">");
+//        sBuf.append("	function setPageNo( value ){");
+//        sBuf.append("		document.getElementById(\"page.pageNo\").value = value;");
+//        //sBuf.append("		alert(document.getElementById(\"pageNo\").value);");
+//        sBuf.append("	}");
+//        sBuf.append("</script>");
+//        sBuf.append("<input type=\"hidden\" id=\"page.pageNo\" name=\"page.pageNo\" value=\"").append(curPageNo).append("\">");		//分页参数：当前页隐藏域
+//
+//
+//        sBuf.append("&nbsp;第").append(curPageNo).append("页 / 共").append(getTotalPage()).append("页&nbsp;");
+//        sBuf.append("&nbsp;总共").append(getTotalCount()).append("条记录 每页").append(getPageSize()).append("条记录&nbsp;");
+//
+//        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(1);formSubmit('").append(url).append("','_self')");
+//        sBuf.append("\">[首页]");
+//        sBuf.append("</a>&nbsp;");
+//
+//        if(this.pageNo<=1){
+//            curPageNo = 1;
+//        }else{
+//            curPageNo = this.pageNo - 1;
+//        }
+//        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(").append(curPageNo).append(");formSubmit('").append(url).append("','_self')");
+//        sBuf.append("\">[上一页]");
+//        sBuf.append("</a>&nbsp;");
+//
+//
+//        if(this.pageNo>=getTotalPage()){
+//            curPageNo = getTotalPage();
+//        }else{
+//            curPageNo = this.pageNo + 1;
+//        }
+//        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(").append(curPageNo).append(");formSubmit('").append(url).append("','_self')");
+//        sBuf.append("\">[下一页]");
+//        sBuf.append("</a>&nbsp;");
+//
+//        sBuf.append("<a href=\"#").append("\" onclick=\"setPageNo(").append(getTotalPage()).append(");formSubmit('").append(url).append("','_self')");
+//        sBuf.append("\">[末页]");
+//        sBuf.append("</a>&nbsp;");
+//
+//        sBuf.append("</span>");
+//
+//        return sBuf.toString();
+//    }
 
 }

@@ -21,7 +21,7 @@
         <property name="updateBy" column="UPDATE_BY" />
         <property name="updateTime" column="UPDATE_TIME" />
 
-        <many-to-one name="dept" class="com.yaorange.jk.entity.Dept" column="DEPT_ID"/>
+        <many-to-one name="dept" class="com.yaorange.jk.entity.Dept" column="DEPT_ID" lazy="false"/>
         <one-to-one name="userInfo" class="com.yaorange.jk.entity.UserInfo" cascade="all"/>
 
         <set name="roleSet" inverse="false" lazy="true" table="ROLE_USER_P">

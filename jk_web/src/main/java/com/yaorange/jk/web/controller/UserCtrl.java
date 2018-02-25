@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.UUID;
 
-@Controller
+@Controller("userinfo")
 @RequestMapping("/user")
 public class UserCtrl {
     @RequestMapping("/info")

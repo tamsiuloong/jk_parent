@@ -1,5 +1,6 @@
 package com.yaorange.jk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class User extends BaseEntity {
     private String name;
     private String uid;
     private String introduction;
+
 
     private Dept dept;//所属部门
     private UserInfo userInfo;//扩展信息
