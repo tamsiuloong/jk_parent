@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Created by coach-tam on 2018/2/24.
  */
@@ -27,6 +29,12 @@ public class UserCtrl {
         return result;
     }
 
+    @RequestMapping(value = "/user/getAll",method = RequestMethod.GET)
+    public List<User> getAll(Pagination page)
+    {
+        List<User> userList = userService.findAll();
+        return userList;
+    }
     @RequestMapping(value = "/user",method = RequestMethod.DELETE)
     public String delete(String[] ids)
     {

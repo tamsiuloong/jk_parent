@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by coach-tam on 2018/2/24.
  */
@@ -24,6 +26,13 @@ public class DeptCtrl {
     {
         Pagination result = deptService.findByPage(page);
         return result;
+    }
+
+    @RequestMapping(value = "/dept/getAll",method = RequestMethod.GET)
+    public List<Dept> getAll(Pagination page)
+    {
+        List<Dept> deptList = deptService.findAll();
+        return deptList;
     }
 
     @RequestMapping(value = "/dept",method = RequestMethod.DELETE)
