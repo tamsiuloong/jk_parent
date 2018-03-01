@@ -4,10 +4,7 @@ import com.yaorange.jk.entity.User;
 import com.yaorange.jk.service.UserService;
 import com.yaorange.jk.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,9 +27,10 @@ public class UserCtrl {
     }
 
     @RequestMapping(value = "/user/getAll",method = RequestMethod.GET)
-    public List<User> getAll(Pagination page)
+    public List<User> getAll()
     {
         List<User> userList = userService.findAll();
+
         return userList;
     }
     @RequestMapping(value = "/user",method = RequestMethod.DELETE)
@@ -56,4 +54,6 @@ public class UserCtrl {
         userService.save(user);
         return user;
     }
+
+
 }

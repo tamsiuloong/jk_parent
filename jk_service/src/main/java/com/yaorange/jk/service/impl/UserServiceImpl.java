@@ -3,6 +3,7 @@ package com.yaorange.jk.service.impl;
 import com.yaorange.jk.dao.BaseDao;
 import com.yaorange.jk.entity.Role;
 import com.yaorange.jk.entity.User;
+import com.yaorange.jk.entity.UserInfo;
 import com.yaorange.jk.service.RoleService;
 import com.yaorange.jk.service.UserService;
 import com.yaorange.jk.utils.Encrypt;
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return userDao.getListByHQL("from User");
+        return userDao.getListByHQL("select new User(id,userName) from User");
     }
 
     @Override
@@ -114,13 +115,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User model) {
+        UserInfo ui = model.getUserInfo();
         //根据id查询出数据库的老数据
         User user = userDao.get(User.class,model.getId());
         user.setDept(model.getDept());
         user.setUserName(model.getUserName());
         user.setState(model.getState());
+        user.getUserInfo().setDegree(ui.getDegree());
+        user.getUserInfo().setBirthday(ui.getBirthday());
+        user.getUserInfo().setEmail(ui.getEmail());
+        user.getUserInfo().setGender(ui.getGender());
+        user.getUserInfo().setJoinDate(ui.getJoinDate());
+        user.getUserInfo().setManager(ui.getManager());
+        user.getUserInfo().setName(ui.getName());
+        user.getUserInfo().setOrderNo(ui.getOrderNo());
+        user.getUserInfo().setRemark(ui.getRemark());
+        user.getUserInfo().setSalary(ui.getSalary());
+        user.getUserInfo().setStation(ui.getStation());
+        user.getUserInfo().setTelephone(ui.getTelephone());
         user.setUpdateTime(new Date());
 
+//        model.getUserInfo().setUser(model);
+//        model.setUpdateTime(new Date());
+//        model.setCreateTime(user.getCreateTime());
+//        userDao.evict(user);
         userDao.update(user);
     }
 

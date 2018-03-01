@@ -30,6 +30,19 @@ public class User extends BaseEntity {
     private UserInfo userInfo;//扩展信息
     private Set<Role> roleSet=new HashSet<>();
 
+
+    //view object (因为fastjson的死循环检测机制，不会转换以下数据，因此得自己转换)
+    private String deptId;
+    private String managerId;
+
+    public User() {
+    }
+
+    public User(String id, String userName) {
+        this.id = id;
+        this.userName = userName;
+    }
+
     public String getId() {
         return id;
     }
@@ -124,5 +137,30 @@ public class User extends BaseEntity {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public String getDeptId() {
+        if(dept!=null)
+        {
+            deptId = this.getDept().getId();
+        }
+
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getManagerId() {
+        if(userInfo!=null&&userInfo.getManager()!=null)
+        {
+            managerId = this.getUserInfo().getManager().getId();
+        }
+        return managerId;
+    }
+
+    public void setManagerId(String managerId) {
+        this.managerId = managerId;
     }
 }
