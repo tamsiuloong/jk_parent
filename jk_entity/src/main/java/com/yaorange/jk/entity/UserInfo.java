@@ -1,5 +1,6 @@
 package com.yaorange.jk.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import oracle.sql.DATE;
 
@@ -26,6 +27,7 @@ public class UserInfo extends BaseEntity {
 
     private String id;
     private String name;
+    @JSONField(serialize = false)
     private User manager;//直属领导
     private Date joinDate;//入职日期
     private Double salary;
@@ -38,7 +40,7 @@ public class UserInfo extends BaseEntity {
     private Integer orderNo;
     private String email;
 
-    @JsonIgnore
+    @JSONField(serialize = false)
     private User user;//所属用户
 
     public String getId() {

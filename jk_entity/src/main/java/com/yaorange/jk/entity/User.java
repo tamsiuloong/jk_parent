@@ -1,5 +1,6 @@
 package com.yaorange.jk.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +26,10 @@ public class User extends BaseEntity {
     private String uid;
     private String introduction;
 
-
+    @JSONField(serialize = false)
     private Dept dept;//所属部门
     private UserInfo userInfo;//扩展信息
+    @JSONField(serialize = false)
     private Set<Role> roleSet=new HashSet<>();
 
 
