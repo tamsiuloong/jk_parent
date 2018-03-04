@@ -1,5 +1,7 @@
 package com.yaorange.jk.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Set;
 
 /**
@@ -13,6 +15,7 @@ public class Role extends BaseEntity {
     private String remark;
     private Integer orderNo;//用于排序
 
+    @JSONField(serialize = false)
     private Set<Module> moduleSet;
 
     public String getId() {

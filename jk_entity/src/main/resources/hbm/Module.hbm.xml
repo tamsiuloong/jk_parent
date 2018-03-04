@@ -28,5 +28,16 @@
         <property name="createTime" column="CREATE_TIME"/>
         <property name="updateBy" column="UPDATE_BY"/>
         <property name="updateTime" column="UPDATE_TIME"/>
+
+        <set name="children" cascade="save-update">
+            <key column="PARENT_ID"></key>
+            <one-to-many class="com.yaorange.jk.entity.Module"/>
+        </set>
+
+
+        <set name="roleSet" table="ROLE_MODULE_P" >
+            <key column="MODULE_ID"></key>
+            <many-to-many class="com.yaorange.jk.entity.Role" column="ROLE_ID" order-by="orderNo"/>
+        </set>
     </class>
 </hibernate-mapping>

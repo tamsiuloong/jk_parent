@@ -18,7 +18,7 @@ public interface RoleService {
 
     Role findById(String id);
 
-    void update(Role model);
+    void update(Role model,String[] moduleIds);
 
     void deleteByIds(String[] ids);
 

@@ -1,6 +1,5 @@
 package com.yaorange.jk.service.impl;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.yaorange.jk.dao.BaseDao;
 import com.yaorange.jk.entity.Module;
 import com.yaorange.jk.service.ModuleService;
@@ -76,5 +75,31 @@ public class ModuleServiceImpl implements ModuleService {
         {
             moduleDao.deleteById(Module.class,id);
         }
+    }
+
+    @Override
+    public List<Module> findByPid(String pid) {
+        List<Module> result = null;
+        String hql = "from Module where 1=1 ";
+        if(pid!=null && (pid.isEmpty() || pid.equals("0")))
+        {
+            hql += " and parentId is null";
+            result = moduleDao.getListByHQL(hql);;
+        }else
+        {
+            hql += " and parentId = ?";
+            result = moduleDao.getListByHQL(hql,pid);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Module> findByRoleId(String rid) {
+        List<Module> result = null;
+        String hql = "select distinct m from Module m  join fetch m.roleSet r where r.id = ?  ";
+
+        result = moduleDao.getListByHQL(hql,rid);;
+
+        return result;
     }
 }

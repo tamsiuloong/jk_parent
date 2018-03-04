@@ -21,4 +21,8 @@ public interface ModuleService {
     void update(Module model);
 
     void deleteByIds(String[] ids);
+
+    List<Module> findByPid(String pid);
+
+    List<Module> findByRoleId(String rid);
 }

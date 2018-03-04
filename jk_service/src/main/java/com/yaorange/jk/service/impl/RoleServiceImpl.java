@@ -6,6 +6,7 @@ import com.yaorange.jk.entity.Role;
 import com.yaorange.jk.service.ModuleService;
 import com.yaorange.jk.service.RoleService;
 import com.yaorange.jk.utils.Pagination;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,13 +52,40 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void update(Role model) {
+    public void update(Role model,String[] moduleIds) {
         Role role = roleDao.get(Role.class,model.getId());
+
+
+
+
 
         role.setName(model.getName());
         role.setRemark(model.getRemark());
+
         role.setUpdateTime(new Date());
 
+        //moduleIds --> moduleSet
+        Set<Module> moduleSet = new HashSet<>();
+
+        for (String mId:moduleIds) {
+
+
+            //由于ivew 的tree在选中A下的子节点时，只要没有把A下子节点 选中，那么A不会被选中。
+            //这导致一个问题，父权限如果都没有，子权限就无效。所以怎么办？1，该用ztree   2，手动选中父节点(不行)
+
+            Module module = moduleService.findById(mId);
+            moduleSet.add(module);
+
+            if(module.getParentId()!=null&&!module.getParentId().isEmpty())
+            {
+                Module parent = new Module();
+                parent.setId(module.getParentId());
+                moduleSet.add(parent);
+            }
+            moduleSet.add(module);
+        }
+
+        role.setModuleSet(moduleSet);
         roleDao.update(role);
     }
 
