@@ -29,7 +29,7 @@ public class Module extends BaseEntity {
     private Long orderNo;
     @JSONField(serialize = false)
     private Set<Role> roleSet = new HashSet<>();//拥有该模块的角色
-
+    @JSONField(serialize = false)
     private Set<Module> children=new HashSet<>();//子模块
 
     public String getId() {

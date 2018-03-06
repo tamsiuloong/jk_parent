@@ -37,7 +37,7 @@ public class ModuleServiceImpl implements ModuleService {
 
         //更新父模块
         //根据模块名字查询出对应权限id
-        Module parentModule = moduleDao.getByHQL("from Module where name=?",model.getParentName());
+        Module parentModule = moduleDao.getByHQL("from Module where id=?",model.getParentId());
         model.setParentId(parentModule.getId());
         model.setParentName(parentModule.getName());
 
@@ -100,6 +100,17 @@ public class ModuleServiceImpl implements ModuleService {
 
         result = moduleDao.getListByHQL(hql,rid);;
 
+        return result;
+    }
+
+    @Override
+    public List<Module> findListByCtype(Integer ctype) {
+        List<Module> result = null;
+        if(ctype!=null&&!ctype.equals(0))
+        {
+            String hql = "from Module m where m.ctype = ?";
+            result = moduleDao.getListByHQL(hql,(long)ctype-1);
+        }
         return result;
     }
 }

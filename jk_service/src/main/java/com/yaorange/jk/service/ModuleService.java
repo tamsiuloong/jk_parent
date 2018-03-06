@@ -25,4 +25,11 @@ public interface ModuleService {
     List<Module> findByPid(String pid);
 
     List<Module> findByRoleId(String rid);
+
+    /**
+     * 根据选中菜单类型 查询对应父菜单
+     * @param ctype
+     * @return
+     */
+    List<Module> findListByCtype(Integer ctype);
 }
