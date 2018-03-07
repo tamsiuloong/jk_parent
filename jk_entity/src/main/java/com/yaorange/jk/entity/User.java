@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,8 +21,7 @@ public class User extends BaseEntity {
     private String userName;
     private Integer state;
     private String password;
-    private String token;
-    private String[] role;
+
     private String name;
     private String uid;
     private String introduction;
@@ -36,6 +36,8 @@ public class User extends BaseEntity {
     //view object (因为fastjson的死循环检测机制，不会转换以下数据，因此得自己转换)
     private String deptId;
     private String managerId;
+    private String token;
+    private List<String> permissions;
 
     public User() {
     }
@@ -109,13 +111,7 @@ public class User extends BaseEntity {
         this.token = token;
     }
 
-    public String[] getRole() {
-        return role;
-    }
 
-    public void setRole(String[] role) {
-        this.role = role;
-    }
 
     public String getName() {
         return name;
@@ -160,6 +156,14 @@ public class User extends BaseEntity {
             managerId = this.getUserInfo().getManager().getId();
         }
         return managerId;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 
     public void setManagerId(String managerId) {

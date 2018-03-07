@@ -11,5 +11,12 @@
 
     <artifactId>jk_entity</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.yaorange</groupId>
+            <artifactId>jk_utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
