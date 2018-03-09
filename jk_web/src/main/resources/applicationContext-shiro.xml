@@ -69,8 +69,8 @@
 				/ufiles/** = anon
 				/validator/** = anon
 				/resource/** = anon
-				/** = authc
-				/*.* = authc
+				/** = token
+				/*.* = token
             </value>
         </property>
     </bean>

@@ -34,28 +34,40 @@ public class LoginCtrl {
         {
             try{
 
-                Subject subject = SecurityUtils.getSubject();
-                //将表单数据封装到token对象中
-                //token-->令牌
-                UsernamePasswordToken token = new UsernamePasswordToken(username,password);
-                subject.login(token);
+//                Subject subject = SecurityUtils.getSubject();
+//                //将表单数据封装到token对象中
+//                //token-->令牌
+//                UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+//                subject.login(token);
+//
+//                User user = (User)subject.getPrincipal();
+//
+////                user.setIntroduction("im super pig");
+////                user.setRole(new String[]{"test"});
+//                List<String> permissions  = new ArrayList<>();
+//                Set<Role> roleSet = user.getRoleSet();
+//                roleSet.forEach(role -> {
+//                    role.getModuleSet().forEach(module -> {
+//                        permissions.add(module.getName());
+//                    });
+//                });
+//
+//                permissions.add("/");
+//                user.setPermissions(permissions);
+//                user.setToken(UUID.randomUUID().toString());
 
-                User user = (User)subject.getPrincipal();
 
-//                user.setIntroduction("im super pig");
-//                user.setRole(new String[]{"test"});
-                List<String> permissions  = new ArrayList<>();
-                Set<Role> roleSet = user.getRoleSet();
-                roleSet.forEach(role -> {
-                    role.getModuleSet().forEach(module -> {
-                        permissions.add(module.getName());
-                    });
-                });
+
+                User user = new User();
+                user.setId("1");
+                user.setUid("1");
+                user.setName("admin");
+                user.setIntroduction("im super pig");
+                List<String>  permissions = new ArrayList<>();
+                permissions.add("admin");
 
                 user.setPermissions(permissions);
                 user.setToken(UUID.randomUUID().toString());
-
-
                 //将用户信息保存到session
                 session.setAttribute(user.getToken(),user);
 
