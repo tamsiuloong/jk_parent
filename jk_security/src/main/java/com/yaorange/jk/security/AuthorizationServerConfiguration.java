@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * 认证服务器配置
@@ -24,8 +25,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	private static String REALM="MY_OAUTH_REALM";
 
+//	@Autowired
+//	private TokenStore tokenStore;
+
 	@Autowired
-	private TokenStore tokenStore;
+	private JwtTokenStore tokenStore;
 
 	@Autowired
 	private UserApprovalHandler userApprovalHandler;

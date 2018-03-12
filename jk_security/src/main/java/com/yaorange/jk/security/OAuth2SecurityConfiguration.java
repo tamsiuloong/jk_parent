@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -36,39 +35,17 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ClientDetailsService clientDetailsService;
 
-	@Autowired
-	private MyUserDetailsService userDetailsService;
-
-//	/**
-//	 * 在内存中创建两个用户
-//	 * @param auth
-//	 * @throws Exception
-//	 */
-//	@Autowired
-//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//        .withUser("bill").password("abc123").roles("admin1").and()
-//        .withUser("bob").password("abc123").roles("USER");
-//    }
-
 	/**
-	 * 从数据库中查询用户
+	 * 在内存中创建两个用户
 	 * @param auth
 	 * @throws Exception
-     */
-	@Autowired
-	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}
-
-	/**
-	 * 密码加密
 	 */
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
-
+	@Autowired
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+        .withUser("bill").password("abc123").roles("admin1").and()
+        .withUser("bob").password("abc123").roles("USER");
+    }
 
 	/**
 	 * 设置获取token的url
@@ -86,7 +63,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.csrf().disable();
     }
-	//需要配置这个支持password模式 support password grant type
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {

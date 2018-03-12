@@ -13,6 +13,7 @@
         <module>jk_dao</module>
         <module>jk_service</module>
         <module>jk_web</module>
+        <module>jk_security</module>
     </modules>
 
     <packaging>pom</packaging>
