@@ -2,6 +2,7 @@ package com.yaorange.jk.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import oracle.sql.DATE;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @author coach tam
  * @date 2017/12/21
  */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","manager","user"})
 public class UserInfo extends BaseEntity {
 
 //    USER_INFO_ID         VARCHAR2(40)                    not null,
@@ -27,7 +29,6 @@ public class UserInfo extends BaseEntity {
 
     private String id;
     private String name;
-    @JSONField(serialize = false)
     private User manager;//直属领导
     private Date joinDate;//入职日期
     private Double salary;
@@ -40,7 +41,6 @@ public class UserInfo extends BaseEntity {
     private Integer orderNo;
     private String email;
 
-    @JSONField(serialize = false)
     private User user;//所属用户
 
     public String getId() {

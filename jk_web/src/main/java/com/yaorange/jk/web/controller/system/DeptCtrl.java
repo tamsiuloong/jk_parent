@@ -1,9 +1,11 @@
 package com.yaorange.jk.web.controller.system;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.yaorange.jk.entity.Dept;
 import com.yaorange.jk.entity.User;
 import com.yaorange.jk.service.DeptService;
 import com.yaorange.jk.utils.Pagination;
+import com.yaorange.jk.utils.ViewVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,28 +16,31 @@ import java.util.List;
  * Created by coach-tam on 2018/2/24.
  */
 //@Controller
-@RequestMapping("/system")
+@RequestMapping("/system/dept")
 @RestController
 public class DeptCtrl {
 
     @Autowired
     private DeptService deptService;
 
-    @RequestMapping(value = "/dept",method = RequestMethod.GET)
+    @GetMapping
+    @JsonView(ViewVo.Simple.class)
     public Pagination list(Pagination page)
     {
         Pagination result = deptService.findByPage(page);
         return result;
     }
 
-    @RequestMapping(value = "/dept/getAll",method = RequestMethod.GET)
+
+    @GetMapping("getAll")
+    @JsonView(ViewVo.Simple.class)
     public List<Dept> getAll(Pagination page)
     {
         List<Dept> deptList = deptService.findAll();
         return deptList;
     }
 
-    @RequestMapping(value = "/dept",method = RequestMethod.DELETE)
+    @DeleteMapping
     public String delete(String[] ids)
     {
         deptService.deleteByIds(ids);
@@ -43,14 +48,14 @@ public class DeptCtrl {
     }
 
 
-    @RequestMapping(value = "/dept",method = RequestMethod.PUT)
+    @PutMapping
     public String update(@RequestBody Dept dept)
     {
         deptService.update(dept);
         return "1";
     }
 
-    @RequestMapping(value = "/dept",method = RequestMethod.POST)
+    @PostMapping
     public Dept add(@RequestBody Dept dept)
     {
         deptService.save(dept);

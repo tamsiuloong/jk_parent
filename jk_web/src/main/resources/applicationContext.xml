@@ -65,7 +65,6 @@
 
 
 
-    <import resource="classpath:applicationContext-shiro.xml"/>
     <import resource="classpath:applicationContext-mail.xml"/>
     <import resource="classpath:applicationContext-quartz.xml"/>
     <!--<import resource="classpath:applicationContext-cxf.xml"/>-->

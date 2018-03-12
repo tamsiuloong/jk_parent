@@ -19,14 +19,15 @@
 
 
     <properties>
-        <spring.version>4.2.4.RELEASE</spring.version>
+        <spring.version>4.3.3.RELEASE</spring.version>
+        <springsecurity.version>4.1.4.RELEASE</springsecurity.version>
+        <springsecurityoauth2.version>2.0.12.RELEASE</springsecurityoauth2.version>
         <hibernate.version>5.0.7.Final</hibernate.version>
         <slf4j.version>1.6.6</slf4j.version>
         <log4j.version>1.2.12</log4j.version>
         <shiro.version>1.2.3</shiro.version>
         <cxf.version>3.0.1</cxf.version>
         <c3p0.version>0.9.1.2</c3p0.version>
-
     </properties>
 
     <dependencies>
@@ -152,6 +153,24 @@
         </dependency>
 
 
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${springsecurity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${springsecurity.version}</version>
+        </dependency>
+
+        <!-- Spring Security OAuth2-->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${springsecurityoauth2.version}</version>
+        </dependency>
 
         <!-- springmvc  begin -->
         <dependency>
@@ -305,6 +324,8 @@
             <artifactId>ehcache-core</artifactId>
             <version>2.6.6</version>
         </dependency>
+
+
     </dependencies>
 
     <build>

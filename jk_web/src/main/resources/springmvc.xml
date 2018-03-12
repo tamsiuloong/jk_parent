@@ -14,51 +14,47 @@
     <!-- 配置扫描的包 -->
     <context:component-scan base-package="com.yaorange.jk.web" />
 
+    <!--哇，fastjson和spring security oath2有兼容问题-->
     <!-- 注册HandlerMapper、HandlerAdapter两个映射类 -->
-    <mvc:annotation-driven >
-        <mvc:message-converters register-defaults="true">
-            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>text/html;charset=UTF-8</value>
-                        <value>application/json</value>
-                        <value>application/xml;charset=UTF-8</value>
-                    </list>
-                </property>
-                <property name="features">
-                    <list>
-                        <!-- 默认的意思就是不配置这个属性，配置了就不是默认了 -->
-                        <!-- 是否输出值为null的字段 ，默认是false-->
-                        <value>WriteMapNullValue</value>
-                        <value>WriteNullNumberAsZero</value>
-                        <value>WriteNullListAsEmpty</value>
-                        <value>WriteNullStringAsEmpty</value>
-                        <value>WriteNullBooleanAsFalse</value>
-                        <value>WriteDateUseDateFormat</value>
-                    </list>
-                </property>
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
+    <!--<mvc:annotation-driven >-->
+        <!--<mvc:message-converters register-defaults="true">-->
+            <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
+                <!--<property name="supportedMediaTypes">-->
+                    <!--<list>-->
+                        <!--<value>text/html;charset=UTF-8</value>-->
+                        <!--<value>application/json</value>-->
+                        <!--<value>application/xml;charset=UTF-8</value>-->
+                    <!--</list>-->
+                <!--</property>-->
+                <!--<property name="features">-->
+                    <!--<list>-->
+                        <!--&lt;!&ndash; 默认的意思就是不配置这个属性，配置了就不是默认了 &ndash;&gt;-->
+                        <!--&lt;!&ndash; 是否输出值为null的字段 ，默认是false&ndash;&gt;-->
+                        <!--<value>WriteMapNullValue</value>-->
+                        <!--<value>WriteNullNumberAsZero</value>-->
+                        <!--<value>WriteNullListAsEmpty</value>-->
+                        <!--<value>WriteNullStringAsEmpty</value>-->
+                        <!--<value>WriteNullBooleanAsFalse</value>-->
+                        <!--<value>WriteDateUseDateFormat</value>-->
+                    <!--</list>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
 
     <!-- 访问静态资源 -->
     <mvc:default-servlet-handler />
 
     <!-- 用于注解的处理器适配器 -->
-    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
-        <!--<property name="messageConverters">-->
-            <!--&lt;!&ndash; Json消息转换器 &ndash;&gt;-->
-            <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <!-- Json消息转换器 -->
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
         </property>
     </bean>
+
+
+
     <!-- 视图解析器 -->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">

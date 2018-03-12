@@ -2,6 +2,8 @@ package com.yaorange.jk.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -14,7 +16,11 @@ import java.util.Set;
  * @author coach tam
  * @date 2017/12/19
  */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","dept","roleSet"})
 public class User extends BaseEntity {
+
+    public interface UserSimpleView {};
+    public interface UserDetailView extends UserSimpleView {};
 
     private String id;
 
@@ -26,10 +32,8 @@ public class User extends BaseEntity {
     private String uid;
     private String introduction;
 
-    @JSONField(serialize = false)
     private Dept dept;//所属部门
     private UserInfo userInfo;//扩展信息
-    @JSONField(serialize = false)
     private Set<Role> roleSet=new HashSet<>();
 
 
@@ -46,7 +50,7 @@ public class User extends BaseEntity {
         this.id = id;
         this.userName = userName;
     }
-
+    @JsonView(UserSimpleView.class)
     public String getId() {
         return id;
     }
@@ -62,7 +66,7 @@ public class User extends BaseEntity {
     public void setDept(Dept dept) {
         this.dept = dept;
     }
-
+    @JsonView(UserSimpleView.class)
     public String getUserName() {
         return userName;
     }
@@ -70,7 +74,7 @@ public class User extends BaseEntity {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
+    @JsonView(UserSimpleView.class)
     public Integer getState() {
         return state;
     }
@@ -78,7 +82,6 @@ public class User extends BaseEntity {
     public void setState(Integer state) {
         this.state = state;
     }
-
     public String getPassword() {
         return password;
     }
@@ -87,6 +90,7 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+    @JsonView(UserSimpleView.class)
     public UserInfo getUserInfo() {
         return userInfo;
     }

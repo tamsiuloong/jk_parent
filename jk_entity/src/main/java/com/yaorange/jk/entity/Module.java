@@ -1,6 +1,7 @@
 package com.yaorange.jk.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -10,6 +11,8 @@ import java.util.Set;
  * @author coach tam
  * @date 2017/12/21
  */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","roleSet","children"})
+
 public class Module extends BaseEntity {
     private String id;
     private String parentId;

@@ -1,5 +1,7 @@
 package com.yaorange.jk.utils;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.util.List;
 
 /**
@@ -42,6 +44,7 @@ public class Pagination extends SimplePage implements java.io.Serializable {
      *
      * @return
      */
+    @JsonView(ViewVo.Simple.class)
     public int getFirstResult() {
         return (pageNo - 1) * pageSize;
     }
@@ -67,6 +70,7 @@ public class Pagination extends SimplePage implements java.io.Serializable {
      *
      * @return
      */
+    @JsonView(ViewVo.Simple.class)
     public List<?> getList() {
         return list;
     }

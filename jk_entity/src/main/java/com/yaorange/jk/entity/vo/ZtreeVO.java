@@ -1,5 +1,7 @@
 package com.yaorange.jk.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ import java.io.Serializable;
 public class ZtreeVO implements Serializable {
 
     private String id;
+    @JsonProperty(value = "pId")
     private String pId;
     private String name;
     private Boolean open;//是否展开

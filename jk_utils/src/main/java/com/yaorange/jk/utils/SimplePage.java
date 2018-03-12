@@ -1,5 +1,7 @@
 package com.yaorange.jk.utils;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 /**
  * 简单分页类
  */
@@ -64,6 +66,7 @@ public class SimplePage  {
 	/**
 	 * 获得页码
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -71,6 +74,7 @@ public class SimplePage  {
 	/**
 	 * 每页几条数据
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public int getPageSize() {
 		return pageSize;
 	}
@@ -78,6 +82,7 @@ public class SimplePage  {
 	/**
 	 * 总共几条数据
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public int getTotalCount() {
 		return totalCount;
 	}
@@ -85,6 +90,7 @@ public class SimplePage  {
 	/**
 	 * 总共几页
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public int getTotalPage() {
 		int totalPage = totalCount / pageSize;
 		if (totalPage == 0 || totalCount % pageSize != 0) {
@@ -97,6 +103,7 @@ public class SimplePage  {
 	/**
 	 * 是否第一页
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public boolean isFirstPage() {
 		return pageNo <= 1;
 	}
@@ -104,6 +111,7 @@ public class SimplePage  {
 	/**
 	 * 是否最后一页
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public boolean isLastPage() {
 		return pageNo >= getTotalPage();
 	}
@@ -111,6 +119,7 @@ public class SimplePage  {
 	/**
 	 * 下一页页码
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public int getNextPage() {
 		if (isLastPage()) {
 			return pageNo;
@@ -122,6 +131,7 @@ public class SimplePage  {
 	/**
 	 * 上一页页码
 	 */
+	@JsonView(ViewVo.Simple.class)
 	public int getPrePage() {
 		if (isFirstPage()) {
 			return pageNo;

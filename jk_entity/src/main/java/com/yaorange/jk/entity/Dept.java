@@ -1,7 +1,8 @@
 package com.yaorange.jk.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.yaorange.jk.utils.ViewVo;
 
 import java.io.Serializable;
 
@@ -9,17 +10,25 @@ import java.io.Serializable;
  * @author coach tam
  * @date 2017/12/20
  */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","parent"})
 public class Dept implements Serializable{
+
+    public interface DeptSimpleView {};
+    public interface DeptDetailView extends DeptSimpleView {};
+
+
+    @JsonView(ViewVo.Simple.class)
     private String id;
+    @JsonView(ViewVo.Simple.class)
     private String deptName;
-    @JSONField(serialize = false)
+
     private Dept parent;//many2one
+    @JsonView(ViewVo.Simple.class)
     private Long state;
 
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -31,7 +40,6 @@ public class Dept implements Serializable{
     public void setDeptName(String deptName) {
         this.deptName = deptName;
     }
-
     public Long getState() {
         return state;
     }
@@ -39,7 +47,6 @@ public class Dept implements Serializable{
     public void setState(Long state) {
         this.state = state;
     }
-
     public Dept getParent() {
         return parent;
     }
