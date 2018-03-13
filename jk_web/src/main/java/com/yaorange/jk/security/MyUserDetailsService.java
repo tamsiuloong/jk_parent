@@ -12,10 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.tags.form.SelectTag;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by coach-tam on 2018/3/12.
@@ -41,11 +43,12 @@ public class MyUserDetailsService implements UserDetailsService {
 
 
         Collection<SimpleGrantedAuthority> collection = new HashSet<SimpleGrantedAuthority>();
-        Iterator<Role> iterator =  userEntity.getRoleSet().iterator();
-        while (iterator.hasNext()){
-            collection.add(new SimpleGrantedAuthority(iterator.next().getRemark()));
-        }
-		
+        Set<Role> roleSet =  userEntity.getRoleSet();
+        roleSet.forEach(role->{role.getModuleSet().forEach(module -> {
+            collection.add(new SimpleGrantedAuthority(module.getCpermission()));
+        });});
+
+
 		/*return new User(username, password, AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"));*/
 
         return new User(username, password, collection);
