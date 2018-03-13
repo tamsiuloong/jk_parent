@@ -82,7 +82,8 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //	  	.authorizeRequests()
 //	  	.antMatchers("/oauth/token").permitAll();
 
-		http.requestMatchers().antMatchers(HttpMethod.OPTIONS, "/oauth/token", "/rest/**", "/system/**", "/**")
+		http.logout().logoutSuccessUrl("http://localhost:8888/logout")
+				.and().requestMatchers().antMatchers(HttpMethod.OPTIONS, "/oauth/token", "/rest/**", "/system/**", "/**")
 				.and()
 				.csrf().disable();
     }
