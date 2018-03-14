@@ -16,7 +16,7 @@ import java.util.Set;
  * @author coach tam
  * @date 2017/12/19
  */
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","dept","roleSet"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler",})
 public class User extends BaseEntity {
 
     public interface UserSimpleView {};
@@ -35,6 +35,7 @@ public class User extends BaseEntity {
     private Dept dept;//所属部门
     private UserInfo userInfo;//扩展信息
     private Set<Role> roleSet=new HashSet<>();
+
 
 
     //view object (因为fastjson的死循环检测机制，不会转换以下数据，因此得自己转换)
