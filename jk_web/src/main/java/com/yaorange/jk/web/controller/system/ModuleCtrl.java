@@ -19,7 +19,7 @@ import java.util.Set;
  * Created by coach-tam on 2018/2/24.
  */
 //@Controller
-@RequestMapping("/system")
+@RequestMapping("/system/module")
 @RestController
 public class ModuleCtrl {
 
@@ -29,14 +29,14 @@ public class ModuleCtrl {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping(value = "/module",method = RequestMethod.GET)
+    @GetMapping
     public Pagination list(Pagination page)
     {
         Pagination result = moduleService.findByPage(page);
         return result;
     }
 
-    @RequestMapping(value = "/module/getAll",method = RequestMethod.GET)
+    @GetMapping("/getALL")
     public List<Module> getAll(Pagination page)
     {
         List<Module> moduleList = moduleService.findAll();
@@ -44,13 +44,13 @@ public class ModuleCtrl {
     }
 
 
-    @RequestMapping(value = "/module/getParent/{ctype}",method = RequestMethod.GET)
+    @GetMapping("/getParent/{ctype}")
     public List<Module> getAll(@PathVariable("ctype") Integer ctype)
     {
         List<Module> moduleList = moduleService.findListByCtype(ctype);
         return moduleList;
     }
-    @RequestMapping(value = "/module",method = RequestMethod.DELETE)
+    @DeleteMapping
     public String delete(String[] ids)
     {
         moduleService.deleteByIds(ids);
@@ -58,14 +58,14 @@ public class ModuleCtrl {
     }
 
 
-    @RequestMapping(value = "/module",method = RequestMethod.PUT)
+    @PutMapping
     public String update(@RequestBody Module module)
     {
         moduleService.update(module);
         return "1";
     }
 
-    @RequestMapping(value = "/module",method = RequestMethod.POST)
+    @PostMapping
     public Module add(@RequestBody Module module)
     {
         moduleService.save(module);
@@ -77,7 +77,7 @@ public class ModuleCtrl {
      * @param roleid
      * @return
      */
-    @RequestMapping(value = "/module/getAllModules/{roleid}",method = RequestMethod.GET)
+    @GetMapping("/getAllModules/{roleid}")
     public List<ZtreeVO> getAllModules(@PathVariable("roleid") String roleid)
     {
         //获取当前角色moduleSet
@@ -110,7 +110,7 @@ public class ModuleCtrl {
      * 获取所有模块
      * @return
      */
-    @RequestMapping(value = "/module/getAllModules",method = RequestMethod.GET)
+    @GetMapping("/getAllModules")
     public List<ZtreeVO> getAllModules()
     {
         //获取所有moduleList
