@@ -18,7 +18,6 @@ import java.util.Set;
 /**
  * Created by coach-tam on 2018/2/24.
  */
-//@Controller
 @RequestMapping("/system/module")
 @RestController
 public class ModuleCtrl {

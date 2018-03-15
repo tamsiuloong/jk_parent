@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Created by coach-tam on 2018/2/24.
  */
-//@Controller
 @RequestMapping("/system/user")
 @RestController
 public class UserCtrl {

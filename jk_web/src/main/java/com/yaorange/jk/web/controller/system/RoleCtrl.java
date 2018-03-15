@@ -14,7 +14,6 @@ import java.util.Set;
 /**
  * Created by coach-tam on 2018/2/24.
  */
-//@Controller
 @RequestMapping("/system/role")
 @RestController
 public class RoleCtrl {
