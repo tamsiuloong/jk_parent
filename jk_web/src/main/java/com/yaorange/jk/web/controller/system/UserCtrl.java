@@ -1,5 +1,7 @@
 package com.yaorange.jk.web.controller.system;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.yaorange.jk.entity.BaseEntity;
 import com.yaorange.jk.entity.User;
 import com.yaorange.jk.service.UserService;
 import com.yaorange.jk.utils.Pagination;
@@ -30,6 +32,12 @@ public class UserCtrl {
         List<User> userList = userService.findAll();
 
         return userList;
+    }
+
+    @GetMapping("/{id}")
+    public User get(@PathVariable("id") String id )
+    {
+        return userService.findById(id);
     }
     @DeleteMapping
     public String delete(String[] ids)

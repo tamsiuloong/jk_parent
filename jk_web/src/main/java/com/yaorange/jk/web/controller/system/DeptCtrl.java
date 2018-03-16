@@ -23,7 +23,6 @@ public class DeptCtrl {
     private DeptService deptService;
 
     @GetMapping
-    @JsonView(ViewVo.Simple.class)
     public Pagination list(Pagination page)
     {
         Pagination result = deptService.findByPage(page);
@@ -32,7 +31,6 @@ public class DeptCtrl {
 
 
     @GetMapping("getAll")
-    @JsonView(ViewVo.Simple.class)
     public List<Dept> getAll(Pagination page)
     {
         List<Dept> deptList = deptService.findAll();

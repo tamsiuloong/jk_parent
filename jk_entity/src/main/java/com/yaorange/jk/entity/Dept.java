@@ -13,17 +13,9 @@ import java.io.Serializable;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","parent"})
 public class Dept implements Serializable{
 
-    public interface DeptSimpleView {};
-    public interface DeptDetailView extends DeptSimpleView {};
-
-
-    @JsonView(ViewVo.Simple.class)
     private String id;
-    @JsonView(ViewVo.Simple.class)
     private String deptName;
-
     private Dept parent;//many2one
-    @JsonView(ViewVo.Simple.class)
     private Long state;
 
     public String getId() {

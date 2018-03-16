@@ -46,22 +46,22 @@
     <mvc:default-servlet-handler />
 
     <!-- 用于注解的处理器适配器 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <!-- Json消息转换器 -->
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-        </property>
-    </bean>
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--&lt;!&ndash; Json消息转换器 &ndash;&gt;-->
+            <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 
 
-    <!-- 视图解析器 -->
+    <!-- 视图解析器
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
-
+    -->
 
     <mvc:cors>
         <mvc:mapping path="/**" allowed-origins="http://localhost:9001,http://192.168.1.101:9001" allowed-methods="GET,PUT,DELETE,POST"/>

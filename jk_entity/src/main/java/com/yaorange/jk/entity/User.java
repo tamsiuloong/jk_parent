@@ -16,32 +16,29 @@ import java.util.Set;
  * @author coach tam
  * @date 2017/12/19
  */
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler",})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class User extends BaseEntity {
 
-    public interface UserSimpleView {};
-    public interface UserDetailView extends UserSimpleView {};
-
+    public interface  Info{}
+    @JsonView(Info.class)
     private String id;
-
+    @JsonView(Info.class)
     private String userName;
     private Integer state;
     private String password;
-
-    private String name;
-    private String uid;
-    private String introduction;
 
     private Dept dept;//所属部门
     private UserInfo userInfo;//扩展信息
     private Set<Role> roleSet=new HashSet<>();
 
 
-
     //view object (因为fastjson的死循环检测机制，不会转换以下数据，因此得自己转换)
     private String deptId;
     private String managerId;
+
+    @JsonView(Info.class)
     private String token;
+    @JsonView(Info.class)
     private List<String> permissions;
 
     public User() {
@@ -51,7 +48,7 @@ public class User extends BaseEntity {
         this.id = id;
         this.userName = userName;
     }
-    @JsonView(UserSimpleView.class)
+
     public String getId() {
         return id;
     }
@@ -67,7 +64,6 @@ public class User extends BaseEntity {
     public void setDept(Dept dept) {
         this.dept = dept;
     }
-    @JsonView(UserSimpleView.class)
     public String getUserName() {
         return userName;
     }
@@ -75,7 +71,6 @@ public class User extends BaseEntity {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    @JsonView(UserSimpleView.class)
     public Integer getState() {
         return state;
     }
@@ -91,7 +86,6 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    @JsonView(UserSimpleView.class)
     public UserInfo getUserInfo() {
         return userInfo;
     }
@@ -117,30 +111,6 @@ public class User extends BaseEntity {
     }
 
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
 
     public String getDeptId() {
         if(dept!=null)

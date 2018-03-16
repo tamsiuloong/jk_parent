@@ -3,6 +3,7 @@ package com.yaorange.jk.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import oracle.sql.DATE;
 
 import java.util.Date;
@@ -13,19 +14,6 @@ import java.util.Date;
  */
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","manager","user"})
 public class UserInfo extends BaseEntity {
-
-//    USER_INFO_ID         VARCHAR2(40)                    not null,
-//    NAME                 VARCHAR2(20),
-//    MANAGER_ID           VARCHAR2(40),
-//    JOIN_DATE            TIMESTAMP,
-//    SALARY               NUMERIC(8, 2),
-//    BIRTHDAY             TIMESTAMP,
-//    GENDER               CHAR(1),
-//    STATION              VARCHAR2(20),
-//    TELEPHONE            VARCHAR2(100),
-//    DEGREE               INT,
-//    REMARK               VARCHAR2(600),
-//    ORDER_NO             INT,
 
     private String id;
     private String name;
