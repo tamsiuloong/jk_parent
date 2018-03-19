@@ -1,6 +1,8 @@
 package com.yaorange.jk.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -10,6 +12,7 @@ import java.util.Set;
  * @author coach tam
  * @date 2017/12/27
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","contractProducts"})
 public class Contract extends BaseEntity {
     private String id;
     private String offeror;
@@ -33,6 +36,13 @@ public class Contract extends BaseEntity {
 
 
     private Set<ContractProduct> contractProducts;
+
+
+    //vo 只用于view展示
+    private Long pNum;//货物数量
+    private Long extCNum;//附件数量
+    private String nums;//货物/附件 数量
+
 
     public String getId() {
         return id;
@@ -193,4 +203,29 @@ public class Contract extends BaseEntity {
     public void setContractProducts(Set<ContractProduct> contractProducts) {
         this.contractProducts = contractProducts;
     }
+
+    public Long getpNum() {
+        pNum=0l;
+        if(contractProducts!=null)
+        {
+            pNum = new Long(this.contractProducts.size());
+        }
+
+        return pNum;
+    }
+
+    public Long getExtCNum() {
+        extCNum = 0L;
+        if(contractProducts!=null)
+        {
+            contractProducts.forEach(cp -> {cp.getExtCproducts().forEach(extCproduct -> {extCNum+=extCproduct.getCnumber();});});
+        }
+
+        return extCNum;
+    }
+
+    public String getNums() {
+        return getpNum()+"/"+getExtCNum();
+    }
+
 }

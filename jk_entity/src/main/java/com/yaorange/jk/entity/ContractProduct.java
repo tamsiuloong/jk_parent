@@ -1,5 +1,7 @@
 package com.yaorange.jk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -7,6 +9,7 @@ import java.util.Set;
  * @author coach tam
  * @date 2017/12/27
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","contract","factory"})
 public class ContractProduct implements Serializable {
     private String id;
     private String factoryName;
