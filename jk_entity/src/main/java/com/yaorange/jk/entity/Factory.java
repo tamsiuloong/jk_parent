@@ -1,11 +1,14 @@
 package com.yaorange.jk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Timestamp;
 
 /**
  * @author coach tam
  * @date 2017/12/27
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","contractProduct","factory"})
 public class Factory extends BaseEntity {
     private String id;
     private String ctype;

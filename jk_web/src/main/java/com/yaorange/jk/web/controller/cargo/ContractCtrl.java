@@ -34,7 +34,7 @@ public class ContractCtrl {
     }
 
     @DeleteMapping
-    public String delete(String[] ids)
+    public String delete(@RequestBody String[] ids)
     {
         contractService.deleteByIds(ids);
         return "1";

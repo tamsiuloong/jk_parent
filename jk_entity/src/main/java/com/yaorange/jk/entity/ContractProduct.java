@@ -9,7 +9,7 @@ import java.util.Set;
  * @author coach tam
  * @date 2017/12/27
  */
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","contract","factory"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","extCproducts"})
 public class ContractProduct implements Serializable {
     private String id;
     private String factoryName;

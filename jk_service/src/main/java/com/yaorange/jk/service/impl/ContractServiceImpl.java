@@ -7,6 +7,7 @@ import com.yaorange.jk.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     @Transactional(readOnly = true)
     public Pagination findByPage(Pagination page) {
-        return contractDao.pageByHql("from Contract",page.getPageNo(),page.getPageSize());
+        return contractDao.pageByHql("from Contract order by createTime desc",page.getPageNo(),page.getPageSize());
     }
 
     @Override
@@ -61,7 +62,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void deleteByIds(String[] ids) {
+    public void deleteByIds( String[] ids) {
         for (String id :ids)
         {
             contractDao.deleteById(Contract.class,id);
