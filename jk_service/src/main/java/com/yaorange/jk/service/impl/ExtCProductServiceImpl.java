@@ -2,11 +2,14 @@ package com.yaorange.jk.service.impl;
 
 import com.yaorange.jk.dao.BaseDao;
 import com.yaorange.jk.entity.Contract;
+import com.yaorange.jk.entity.ContractProduct;
 import com.yaorange.jk.entity.ExtCproduct;
+import com.yaorange.jk.service.ContractProductService;
 import com.yaorange.jk.service.ExtCProductService;
 import com.yaorange.jk.service.ContractService;
 import com.yaorange.jk.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,9 @@ public class ExtCProductServiceImpl implements ExtCProductService {
 
     @Autowired
     private ContractService contractService;
+
+    @Autowired
+    private ContractProductService contractProductService;
     @Override
     @Transactional(readOnly = true)
     public Pagination findByPage(Pagination page, String cpId) {
@@ -45,8 +51,9 @@ public class ExtCProductServiceImpl implements ExtCProductService {
         model.setAmount(extCpAmount);
         extCproductDao.save(model);
 
+        ContractProduct cp = contractProductService.findById(model.getContractProduct().getId());
         //合同总金额 = 合同总金额 + 货物金额
-        Contract contract = contractService.findById(model.getContractProduct().getContract().getId());
+        Contract contract = cp.getContract();
         Long totalAmount = contract.getTotalAmount() + extCpAmount;
         contract.setTotalAmount(totalAmount);
         contractService.update(contract);

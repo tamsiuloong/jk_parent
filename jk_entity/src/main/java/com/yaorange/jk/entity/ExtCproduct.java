@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author coach tam
  * @date 2017/12/27
  */
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","contractProduct","factory"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class ExtCproduct implements Serializable{
     private String id;
     private String factoryName;
