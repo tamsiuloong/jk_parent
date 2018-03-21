@@ -163,4 +163,16 @@ public class ExportServiceImpl implements ExportService {
         exportProductDao.evict(old);
         exportProductDao.update(ep);
     }
+
+    @Override
+    public void updateState(String[] ids, int state) {
+        if(ids!=null)
+        {
+            for(String id:ids)
+            {
+                Export export = exportDao.get(Export.class,id);
+                export.setState(state);
+            }
+        }
+    }
 }

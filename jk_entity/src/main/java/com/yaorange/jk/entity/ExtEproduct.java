@@ -1,5 +1,7 @@
 package com.yaorange.jk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,7 @@ import java.io.Serializable;
  * @author coach tam
  * @date 2018/1/2
  */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","factory"})
 public class ExtEproduct implements Serializable{
     private String id;
     private String productNo;

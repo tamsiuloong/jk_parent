@@ -1,6 +1,7 @@
 package com.yaorange.jk.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,8 +12,8 @@ import java.util.Set;
  * @author coach tam
  * @date 2018/1/2
  */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","factory","extEproducts"})
 public class ExportProduct implements Serializable {
-    @JSONField(serialize = false)
     private Export export;
     private String id;
     private String productNo;
@@ -28,9 +29,8 @@ public class ExportProduct implements Serializable {
     private Long price;
     private Long tax;    ////收购单价=合同单价
     private Long orderNo;
-    @JSONField(serialize = false)
+
     private Factory factory;//一个货物对应一个厂家
-    @JSONField(serialize = false)
     private Set<ExtEproduct> extEproducts= new HashSet<>();//一个报运货物 对应 多个报运货物附件
 
     public String getId() {

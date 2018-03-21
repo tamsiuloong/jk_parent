@@ -1,5 +1,7 @@
 package com.yaorange.jk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
@@ -9,6 +11,7 @@ import java.util.Set;
  * @author coach tam
  * @date 2018/1/2
  */
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","exportProducts"})
 public class Export extends BaseEntity{
     private String id;
     private Date inputDate;				//制单日期
@@ -30,6 +33,10 @@ public class Export extends BaseEntity{
 
     private Set<ExportProduct> exportProducts = new HashSet<>();
 
+    //vo 只用于view展示
+    private Long pNum;//货物数量
+    private Long extCNum;//附件数量
+    private String nums;//货物/附件 数量
 
     public String getId() {
         return id;
@@ -165,5 +172,29 @@ public class Export extends BaseEntity{
 
     public void setExportProducts(Set<ExportProduct> exportProducts) {
         this.exportProducts = exportProducts;
+    }
+
+    public Long getpNum() {
+        pNum=0l;
+        if(exportProducts!=null)
+        {
+            pNum = new Long(this.exportProducts.size());
+        }
+
+        return pNum;
+    }
+
+    public Long getExtCNum() {
+        extCNum = 0L;
+        if(exportProducts!=null)
+        {
+            exportProducts.forEach(cp -> {cp.getExtEproducts().forEach(extCproduct -> {extCNum+=extCproduct.getCnumber();});});
+        }
+
+        return extCNum;
+    }
+
+    public String getNums() {
+        return getpNum()+"/"+getExtCNum();
     }
 }

@@ -475,9 +475,15 @@ public class BaseDaoImpl<T, ID extends Serializable> implements BaseDao<T, ID> {
 	}
 
 	@Override
-	public void evict(T module) {
+	public void evict(T t) {
 		Session session = sessionFactory.getCurrentSession();
-		session.evict(module);
+		session.evict(t);
+	}
+
+	@Override
+	public void merge(T t) {
+		Session session = sessionFactory.getCurrentSession();
+		session.merge(t);
 	}
 
 	public static void main(String[] args) {

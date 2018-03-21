@@ -1,5 +1,6 @@
 package com.yaorange.jk.dao;
 
+import com.yaorange.jk.entity.ExportProduct;
 import com.yaorange.jk.entity.Module;
 import com.yaorange.jk.utils.Pagination;
 import org.hibernate.criterion.DetachedCriteria;
@@ -174,4 +175,6 @@ public interface BaseDao<T, ID extends Serializable> {
      * @param module
      */
     void evict(T module);
+
+    void merge(T model);
 }

@@ -27,7 +27,12 @@ public class ExportCtrl {
         return result;
     }
 
-
+    @GetMapping("/{id}")
+    public Export get(@PathVariable("id") String id)
+    {
+        Export result = exportService.findById(id);
+        return result;
+    }
 
 
     @DeleteMapping
@@ -59,5 +64,19 @@ public class ExportCtrl {
         }
 
         return new  ResponseEntity("1", HttpStatus.OK);
+    }
+
+    @PutMapping("/submit")
+    public String submit(@RequestBody String[] ids)
+    {
+        exportService.updateState(ids,1);
+        return "1";
+    }
+
+    @PutMapping("/cancel")
+    public String cancel(@RequestBody String[] ids)
+    {
+        exportService.updateState(ids,0);
+        return "1";
     }
 }

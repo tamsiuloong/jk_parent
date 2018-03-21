@@ -35,4 +35,6 @@ public interface ExportService {
      * @param ep
      */
     void updateEP(ExportProduct ep);
+
+    void updateState(String[] ids, int state);
 }
