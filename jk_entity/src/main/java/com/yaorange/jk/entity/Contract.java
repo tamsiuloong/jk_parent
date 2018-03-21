@@ -2,6 +2,7 @@ package com.yaorange.jk.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.sql.Time;
@@ -28,7 +29,9 @@ public class Contract extends BaseEntity {
     private Date shipTime;
     private Long importNum;
     private Date deliveryPeriod;//交货日期
+    @JsonIgnore
     private Long oldState;
+    @JsonIgnore
     private Long outState;
     private String tradeTerms;
     private String printStyle;

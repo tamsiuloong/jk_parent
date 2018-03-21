@@ -48,7 +48,7 @@ public class ExportServiceImpl implements ExportService {
         Set<ContractProduct> contractProductList = new HashSet<>();
         //1,修改购销合同状态 为 2 已保运
             //4028817a33812ffd013382048ff80024, 4028817a33812ffd0133821a8eb5002b -->数组
-        String[] contractIds = model.getId().split(", ");
+        String[] contractIds = model.getContractIds().split(",");
         for (String contractId:contractIds) {
             Contract contract = contractService.findById(contractId);
             customerContractNo+=" "+contract.getContractNo();

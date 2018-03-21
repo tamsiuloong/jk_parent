@@ -7,7 +7,6 @@ import com.yaorange.jk.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;
@@ -24,8 +23,15 @@ public class ContractServiceImpl implements ContractService {
     private BaseDao<Contract,String> contractDao;
     @Override
     @Transactional(readOnly = true)
-    public Pagination findByPage(Pagination page) {
-        return contractDao.pageByHql("from Contract order by createTime desc",page.getPageNo(),page.getPageSize());
+    public Pagination findByPage(Pagination page, Long state) {
+        String hql = "from Contract c where  1=1 ";
+        if(state!=null)
+        {
+            hql+=" and c.state = ? ";
+        }
+        hql += " order by c.createTime desc";
+
+        return contractDao.pageByHql(hql,page.getPageNo(),page.getPageSize(),state);
     }
 
     @Override
@@ -70,11 +76,15 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void updateState(String id, Long state) {
-        Contract contract = contractDao.get(Contract.class,id);
-        contract.setState(state);
-
-        contractDao.update(contract);
+    public void updateState(String[] ids, Long state) {
+        if(ids!=null)
+        {
+            for (String id :ids) {
+                Contract contract = contractDao.get(Contract.class,id);
+                contract.setState(state);
+                contractDao.update(contract);
+            }
+        }
     }
 
     @Override
