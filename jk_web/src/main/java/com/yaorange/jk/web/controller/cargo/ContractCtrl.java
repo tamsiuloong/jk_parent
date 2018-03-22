@@ -19,16 +19,16 @@ public class ContractCtrl {
     private ContractService contractService;
 
     @GetMapping("/{state}")
-    public Pagination list(Pagination page,@PathVariable(value="state",required = false)Long state)
+    public Pagination list(Pagination page,@PathVariable(value="state",required = false)Long state,String contractNo)
     {
-        Pagination result = contractService.findByPage(page,state);
+        Pagination result = contractService.findByPage(page,state,contractNo);
         return result;
     }
 
     @GetMapping("/all")
-    public Pagination list(Pagination page)
+    public Pagination list(Pagination page,String contractNo)
     {
-        Pagination result = contractService.findByPage(page,null);
+        Pagination result = contractService.findByPage(page,null, contractNo);
         return result;
     }
 

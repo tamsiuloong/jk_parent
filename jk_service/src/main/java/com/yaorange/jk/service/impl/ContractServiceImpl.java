@@ -7,9 +7,9 @@ import com.yaorange.jk.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author coach tam
@@ -23,20 +23,26 @@ public class ContractServiceImpl implements ContractService {
     private BaseDao<Contract,String> contractDao;
     @Override
     @Transactional(readOnly = true)
-    public Pagination findByPage(Pagination page, Long state) {
+    public Pagination findByPage(Pagination page, Long state, String contractNo) {
         String hql = "from Contract c where  1=1 ";
+        List<Object> params = new ArrayList<>();
         if(state!=null)
         {
             hql+=" and c.state = ? ";
+            params.add(state);
+        }
+        if(contractNo!=null&& !StringUtils.isEmpty(contractNo))
+        {
+            hql+=" and c.contractNo like ? ";
+            params.add("%"+contractNo+"%");
         }
         hql += " order by c.createTime desc";
-
-        return contractDao.pageByHql(hql,page.getPageNo(),page.getPageSize(),state);
+        return contractDao.pageByHql(hql,page.getPageNo(),page.getPageSize(),params.toArray());
     }
 
     @Override
     public Pagination findByPage(Pagination page, int state) {
-        return contractDao.pageByHql("from Contract where state = ?",page.getPageNo(),page.getPageSize(),new Long(state));
+        return contractDao.pageByHql("from Contract where state = ?",page.getPageNo(),page.getPageSize(),new Long(state),contractDao);
     }
 
     @Override

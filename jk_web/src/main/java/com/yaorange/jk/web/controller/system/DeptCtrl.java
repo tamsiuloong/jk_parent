@@ -38,7 +38,7 @@ public class DeptCtrl {
     }
 
     @DeleteMapping
-    public String delete(String[] ids)
+    public String delete(@RequestBody String[] ids)
     {
         deptService.deleteByIds(ids);
         return "1";

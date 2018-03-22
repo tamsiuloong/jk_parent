@@ -10,7 +10,7 @@ import java.util.Set;
  * @date 2017/12/21
  */
 
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","moduleSet","remark","orderNo"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler","moduleSet"})
 public class Role extends BaseEntity {
 
     private String id;

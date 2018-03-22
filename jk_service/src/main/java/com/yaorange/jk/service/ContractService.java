@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2017/12/20
  */
 public interface ContractService {
-    Pagination findByPage(Pagination page, Long state);
+    Pagination findByPage(Pagination page, Long state, String contractNo);
 
     List<Contract> findAll();
 
